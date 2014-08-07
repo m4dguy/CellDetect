@@ -1,0 +1,20 @@
+Execution:
+1) Bring up the file browser by clicking the "Folder Button"
+2) Select one or multiple files in the file browser
+3) Click "Play Button"
+4) Grab a coffee ;)
+
+Obtaining results:
+* Results are dumped as CSV files in the folder where the selected images are located
+* For each brightfield image, a file ending with "_results.csv" containing specific information on the cells is generated
+* For all files analysed in the current run, a file "report.csv" is generated
+
+Notes:
+* Until now, only BMP files can be analysed
+* The issue(s) mentioned above will be addressed and fixed
+* If you need additional features, contact me
+
+In case of crash:
+1) Try to reproduce the error
+2) Write down what happened at which execution step
+3) Contact me
