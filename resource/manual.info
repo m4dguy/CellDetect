@@ -10,7 +10,7 @@ Obtaining results:
 * For all files analysed in the current run, a file "report.csv" is generated
 
 Notes:
-* Until now, only BMP files can be analysed
+* Image resolution enforcer (fixes resolutions to a default value) planned
 * The issue(s) mentioned above will be addressed and fixed
 * If you need additional features, contact me
 
