@@ -27,6 +27,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <string>
 #include <algorithm>
 #include <stdlib.h>
 
@@ -56,9 +57,9 @@
 
 typedef struct
 {
-	const char* brightfield;
-	const char* fluorescence;
-	const char* inclusion;
+	std::string brightfield;
+	std::string fluorescence;
+	std::string inclusion;
 }Job;
 
 

@@ -3,8 +3,7 @@
 
 #include "CellDetector.h"
 
-CellDetector::CellDetector() :_src(512), _srcR(512), _srcG(512),
-_preprocessed(512), _inclusion(512), _tmp(512), _res(512)
+CellDetector::CellDetector() :_src(512), _preprocessed(512), _inclusion(512), _tmp(512), _res(512)
 {
 
 }
@@ -18,25 +17,6 @@ void CellDetector::loadImage(const Fl_Image* src)
 	_tmp.resize(src->w(), src->h());
 	_res.resize(src->w(), src->h());
 	FLTKInterface::imageToMatrix(*src, _src);
-}
-
-//legacy method; not called
-//return -1 for unknown image type
-//return 0 for brightfield image
-//return 1 for fluorescence image
-int CellDetector::analyseImage(const Fl_Image* src)
-{
-	int type;
-	dType meanR, meanG;
-	_srcR.resize(src->w(), src->h());
-	_srcG.resize(src->w(), src->h());
-	FLTKInterface::imageToMatrix(*src, _srcR, _srcG, _tmp);
-
-	meanR = NuLLTools::mean(_srcR);
-	meanG = NuLLTools::mean(_srcG);
-
-	type = meanG > meanR;
-	return type;
 }
 
 //set flags

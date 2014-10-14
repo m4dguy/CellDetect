@@ -223,25 +223,25 @@ void Mainframe::clearJobs()
 void Mainframe::runJob(uint f)
 {
 	Job j = _jobs[f];
-	_detector.createReport(j.brightfield, j.fluorescence, j.inclusion);
+	_detector.createReport(j.brightfield.c_str(), j.fluorescence.c_str(), j.inclusion.c_str());
 	
 	if(j.brightfield != "")
 	{
-		loadImage(j.brightfield);
+		loadImage(j.brightfield.c_str());
 		_detector.loadImage(_img);
 		_detector.runBrightfieldProtocoll();
 	}
 
 	if(j.fluorescence != "")
 	{
-		loadImage(j.fluorescence);
+		loadImage(j.fluorescence.c_str());
 		_detector.loadImage(_img);
 		_detector.runFluoProtocoll();
 	}
 
 	if(j.inclusion != "")
 	{
-		loadImage(j.inclusion);
+		loadImage(j.inclusion.c_str());
 		_detector.loadImage(_img);
 		_detector.runInclusionProtocoll();
 	}

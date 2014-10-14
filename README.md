@@ -1,8 +1,8 @@
 CellDetect
 ==========
 
-Auto-Controlled Detection of Cells Version 1.0
-Using FLTK Version 1.3.0
+Auto-Controlled Detection of Cells Version 0.5
+Using FLTK Version 1.3.2
 
 
 Automated Image Analysis Tool for Detection of Red Blood Cells.

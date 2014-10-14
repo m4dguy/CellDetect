@@ -125,7 +125,6 @@ public:
 	~CellDetector(){};
 
 	void loadImage(const Fl_Image* src);
-	int analyseImage(const Fl_Image* src);
 	void setFlags(const Flags& flags);
 
 	//brightfield protocoll
@@ -163,9 +162,6 @@ protected:
 	Matrix<dType> _preprocessed;
 	Matrix<dType> _inclusion;
 	Matrix<dType> _res;
-
-	Matrix<dType> _srcR;
-	Matrix<dType> _srcG;
 
 	//temporary matrix for operations
 	Matrix<dType> _tmp;
