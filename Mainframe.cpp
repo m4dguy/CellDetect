@@ -223,7 +223,7 @@ void Mainframe::clearJobs()
 void Mainframe::runJob(uint f)
 {
 	Job j = _jobs[f];
-	_detector.createReport(j.brightfield.c_str(), j.fluorescence.c_str(), j.inclusion.c_str());
+	_detector.createReport(j.brightfield, j.fluorescence, j.inclusion);
 	
 	if(j.brightfield != "")
 	{

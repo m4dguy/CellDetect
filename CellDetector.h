@@ -111,9 +111,9 @@ typedef struct
 typedef struct
 {
 	std::vector<Cell> cells;
-	const char* imgBrightfield;
-	const char* imgFluo;
-	const char* imgInclusion;
+	std::string imgBrightfield;
+	std::string imgFluo;
+	std::string imgInclusion;
 }Report;
 
 
@@ -141,7 +141,7 @@ public:
 	void assignInclusionBodies();
 
 	//saving and displaying results
-	void createReport(const char* imgBright, const char* imgFluo, const char* imgInclusion);
+	void createReport(std::string imgBright, std::string imgFluo, std::string imgInclusion);
 	Report& currentReport();
 	void flushReports();
 	int dumpSingleImageReport();
@@ -150,10 +150,11 @@ public:
 	int dumpFlags();
 
 	//util
-	std::string getPath(const char* file);
-	std::string getFilename(const char* file);
+	std::string getPath(std::string file);
+	std::string getFilename(std::string file);
 
 protected:
+	std::string directory;
 	Flags _flags;
 	std::vector<Report> _reports;
 

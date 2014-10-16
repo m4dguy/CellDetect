@@ -110,7 +110,6 @@ void CellDetector::measureFluoIntensity()
 		NuLLProcessing::affineRescale(_src, _src);
 
 	//eliminate noise
-	//NuLLProcessing::medianFilter(_src, 
 
 	//determine absolute intensities
 	for(uint i=0; i<cells.size(); ++i)
@@ -119,7 +118,6 @@ void CellDetector::measureFluoIntensity()
 		cells[i].absoluteIntensity = absInt;
 	}
 
-	//expand circles and build foreground-background mask
 	std::vector<HoughTransform::HoughCircle> circs;
 	for(uint i=0; i<cells.size(); ++i)
 		circs.push_back(cells[i].circle);
@@ -128,6 +126,7 @@ void CellDetector::measureFluoIntensity()
 	HoughTransform::plotCirclesFilled(circs, _tmp);
 
 	//determine relative intensities
+	//expand circles and build foreground-background mask
 	for(uint i=0; i<cells.size(); ++i)
 	{
 		cells[i].localBackgroundIntensity = HoughTransform::averageInNeighbourhood(_src, _tmp, cells[i].circle, 7);
@@ -224,7 +223,7 @@ void CellDetector::assignInclusionBodies()
 	}*/
 }
 
-void CellDetector::createReport(const char* imgBright, const char* imgFluo, const char* imgInclusion)
+void CellDetector::createReport(std::string imgBright, std::string imgFluo, std::string imgInclusion)
 {
 	Report rep;
 	rep.imgBrightfield = imgBright;
@@ -331,9 +330,9 @@ int CellDetector::dumpCompleteReport()
 	fprintf(outfile, "\"class\"\t");
 	fprintf(outfile, "\"inclusion bodies\"\t");
 	fprintf(outfile, "\"activated\"\t");
-	fprintf(outfile, "\"file(brightfield)\"\t");
-	fprintf(outfile, "\"file(fluo)\"\t");
-	fprintf(outfile, "\"file(inclusion bodies)\"");
+	fprintf(outfile, "\"file (brightfield)\"\t");
+	fprintf(outfile, "\"file (fluorescence)\"\t");
+	fprintf(outfile, "\"file (inclusion bodies)\"");
 
 	//data
 	uint i=0;									//cell id
@@ -386,7 +385,7 @@ int CellDetector::dumpFlags()
 	return _flags.dump(dst.c_str());
 }
 
-std::string CellDetector::getPath(const char* file)
+std::string CellDetector::getPath(std::string file)
 {
 	std::string res(file);
 	unsigned int mark = res.rfind("\\") + 1;
@@ -394,7 +393,7 @@ std::string CellDetector::getPath(const char* file)
 	return res;
 }
 
-std::string CellDetector::getFilename(const char* file)
+std::string CellDetector::getFilename(std::string file)
 {
 	std::string res(file);
 	unsigned int mark = res.rfind("\\") + 1;
