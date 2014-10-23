@@ -146,6 +146,7 @@ public:
 	void flushReports();
 	int dumpSingleImageReport();
 	int dumpCompleteReport();
+	int dumpStatistics();
 	
 	int dumpFlags();
 

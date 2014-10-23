@@ -1,6 +1,6 @@
 #include "Mainframe.h"
 
-Mainframe::Mainframe(void) : Fl_Double_Window(_width, _height, NAME)
+Mainframe::Mainframe(void) : Fl_Double_Window(50, 50, _width, _height, NAME)
 {
 	Fl::visual(FL_RGB);
 
@@ -275,6 +275,7 @@ void Mainframe::runAllJobs()
 		runJob(i);
 
 	_detector.dumpCompleteReport();
+	_detector.dumpStatistics();
 	clearJobs();
 
 	_prog->label("done");

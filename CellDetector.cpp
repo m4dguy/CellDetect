@@ -373,6 +373,71 @@ int CellDetector::dumpCompleteReport()
 	return fclose(outfile);
 }
 
+int CellDetector::dumpStatistics()
+{
+	//building new filename
+	const char* filename = "statistics.csv";
+	std::string dst = getPath(currentReport().imgBrightfield);
+	dst.append(filename);
+
+	FILE* outfile = fopen(dst.c_str(), "wb");
+
+	//debug: if file can not be created
+	if (!outfile)
+		return 1;
+
+	//header
+	fprintf(outfile, "\"# cells\"\t");
+	fprintf(outfile, "\"%% activated\"\t");
+	fprintf(outfile, "\"%% discocytes\"\t");
+	fprintf(outfile, "\"# vesicles\"\t");
+	fprintf(outfile, "\"avg. vesicles per cell\"\t");
+	fprintf(outfile, "\"mean rel. intensity\"\t");
+	fprintf(outfile, "\"mean radius\"\t");
+	fprintf(outfile, "\"mean area\"\t");
+	
+	Report rep;
+	int cellCount = 0;
+	double activatedPercent = 0;
+	double discoPercent = 0;
+	int vesicleCount = 0;
+	double vesiclesPercent = 0;
+	double meanIntensity = 0;
+	double meanRadius = 0;
+	double meanArea = 0;
+
+	//gather data
+	std::vector<Cell> cells;
+	for(uint r = 0; r<_reports.size(); ++r)
+	{
+		rep = _reports[r];
+		cells = rep.cells;
+		cellCount += cells.size();
+		for (uint c = 0; c <cells.size(); ++c)
+		{
+			activatedPercent += (cells[c].activated) ? 1 : 0;
+			discoPercent += (cells[c].circle.marker == 1) ? 1 : 0;
+			vesicleCount += cells[c].inclusionBodies;
+			meanIntensity += cells[c].relativeIntensity;
+			meanRadius += cells[c].circle.radius;
+			meanArea += cells[c].circle.area;
+		}
+	}
+	
+	activatedPercent /= cellCount;
+	discoPercent /= cellCount;
+	vesiclesPercent = vesicleCount / cellCount;
+	meanIntensity /= cellCount;
+	meanRadius /= cellCount;
+	meanArea /= cellCount;
+
+	//write data
+	fprintf(outfile, "\n%i\t%f\t%f\t%i\t%f\t%f\t%f\t%f",
+		cellCount, activatedPercent, discoPercent, vesicleCount, vesiclesPercent, meanIntensity, meanRadius, meanArea);
+
+	return fclose(outfile);
+}
+
 int CellDetector::dumpFlags()
 {
 	_flags.time = clock() - _flags.time;
